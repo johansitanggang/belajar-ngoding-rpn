@@ -1,20 +1,15 @@
 function highestScore(students) {
   // Code disini
   let newObj = {};
+
   for (let i = 0; i < students.length; i++) {
     let className = students[i].class;
-    newObj[className] = {};
-    let name = "";
-    let maxScore = 0;
-
-    for (let j = 0; j < students.length; j++) {
-      if (students[j].score > maxScore && students[j].class === className) {
-        name = students[j].name;
-        maxScore = students[j].score;
-      }
+    if (!newObj[className] || students[i].score > newObj[className].score) {
+      newObj[className] = {
+        name: students[i].name,
+        score: students[i].score,
+      };
     }
-    newObj[className].name = name;
-    newObj[className].maxScore = maxScore;
   }
   return newObj;
 }
@@ -45,6 +40,7 @@ console.log(
   ])
 );
 
+// expected output
 // {
 //   foxes: { name: 'Dimitri', score: 90 },
 //   wolves: { name: 'Alexei', score: 85 }

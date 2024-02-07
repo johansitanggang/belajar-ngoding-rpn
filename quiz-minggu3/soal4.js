@@ -27,18 +27,20 @@ function graduates(students) {
   } else {
     for (let i = 0; i < students.length; i++) {
       let className = students[i].class;
-      newObj[className] = [];
-      for (let j = 0; j < students.length; j++) {
-        let listNameScore = {};
-        if (students[j].class === className && students[j].score > 75) {
-          listNameScore.name = students[j].name;
-          listNameScore.score = students[j].score;
-          newObj[className].push(listNameScore);
-        }
+      if (!newObj[className]) {
+        newObj[className] = [];
+        // return newObj;
+      }
+
+      if (students[i].score >= 75) {
+        newObj[className].push({
+          name: students[i].name,
+          score: students[i].score,
+        });
       }
     }
-    return newObj;
   }
+  return newObj;
 }
 
 console.log(
